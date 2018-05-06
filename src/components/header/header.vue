@@ -103,7 +103,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import '../../common/stylus/mixin'
+@import '../../common/stylus/mixin.styl'
 .header
 	position relative
 	overflow hidden
@@ -224,14 +224,14 @@ export default {
 		overflow auto
 		// backdrop-filter blur(10px)
 		opacity 1
-		background rgba(7,17,27,0.8)
-		//--------------动画效果----------------
-		//之前没有效果，是因为字母拼写错误。 
+		background rgba(7, 17, 27, 0.8)
+		// --------------动画效果----------------
+		// 之前没有效果，是因为字母拼写错误。
 		&.fade-enter-active, &.fade-leave-active
 			transition all 0.5s
 		&.fade-enter, &.fade-leave-active
 			opacity 0
-			background rgba(7,17,27,0)
+			background rgba(7, 17, 27, 0)
 		.detail-wrapper
 			min-height 100%
 			width 100%
@@ -304,6 +304,5 @@ export default {
 			margin -64px auto
 			clear both
 			font-size 32px
-
 </style>
 
