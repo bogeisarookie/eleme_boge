@@ -215,7 +215,7 @@ export default {
 	position fixed // 相对于浏览器定位
 	left 0
 	bottom 0
-	// z-index 50
+	z-index 50
 	width 100%
 	height 48px
 	background #000

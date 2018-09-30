@@ -14,7 +14,7 @@
         <li v-for="item in goods" class="food-list food-list-hook">
           <h1 class="title">{{item.name}}</h1>
           <ul>
-            <li v-for="food in item.foods" class="food-item border-1px">
+            <li @click="selectFood(food,$event)" v-for="food in item.foods" class="food-item border-1px">
               <div class="icon">
                 <img :src="food.icon" width='57' height='57'>
               </div>
@@ -42,6 +42,7 @@
     </div>
     <!-- Vue 知道计算属性依赖于谁，每当foods发生改变，就会触发这个计算属性 -->
     <shopCart ref="shopcart" :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopCart>
+    <food @add="addFood" :food="selectedFood" ref="food"></food>
   </div>
 
 </template>
@@ -50,6 +51,7 @@
 import BScroll from "better-scroll";
 import shopCart from "components/shopcart/shopcart.vue";
 import cartControl from "components/cartcontrol/cartcontrol.vue";
+import food from "components/food/food.vue";
 export default {
   props: {
     seller: {
@@ -60,7 +62,8 @@ export default {
     return {
       goods: [],
       listHeight: [],
-      scrollY: 0
+      scrollY: 0,
+      selectedFood:{}
     };
   },
   methods: {
@@ -110,6 +113,13 @@ export default {
       );
       let el = foodList[index];
       this.foodsScroll.scrollToElement(el, 300);
+    },
+    selectFood(food, event) {
+      if (!event._constructed) {
+        return;
+      }
+      this.selectedFood = food;
+      this.$refs.food.show();
     }
   },
   computed: {
@@ -154,7 +164,8 @@ export default {
   },
   components: {
     shopCart,
-    cartControl
+    cartControl,
+    food
   },
   events: {
     "cart-add"(target) {
